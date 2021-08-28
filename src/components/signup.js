@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "../firebase";
 import { useAuth } from "../contexts/AuthContext.js";
 import { useHistory } from "react-router";
-import { TextField, Button } from "@material-ui/core";
+import { Button, Link, TextField } from "@material-ui/core";
 
 export default function Signup() {
   const { signup } = useAuth();
@@ -45,6 +45,9 @@ export default function Signup() {
         <Button variant="contained" type="submit">
           Sign Up
         </Button>
+        <div>
+          Already a member? <Link href="/login"> {"Log In"} </Link>
+        </div>
       </form>
     </>
   );

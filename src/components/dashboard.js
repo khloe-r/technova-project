@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import firebase from "../firebase";
 import { useAuth } from "../contexts/AuthContext.js";
-import { TextField, Button } from "@material-ui/core";
+import { Grid, TextField, Button } from "@material-ui/core";
 
 export default function Dashboard() {
   const { currentUser, setDisplayName } = useAuth();
@@ -69,6 +69,15 @@ export default function Dashboard() {
   return (
     <>
       <h1>{currentUser.displayName}'s Dashboard</h1>
+      <Grid container spacing={3}>
+        <Grid item>
+          <Button variant="contained">Browse Articles</Button>
+        </Grid>
+
+        <Grid item>
+          <Button variant="contained">Start Self-Assessment</Button>
+        </Grid>
+      </Grid>
     </>
   );
 }

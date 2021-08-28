@@ -18,8 +18,8 @@ function App() {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Home} />
-            <AuthRoute exact path="/login" component={Login} />
-            <AuthRoute exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
             <AuthRoute exact path="/self-assessment" component={SelfAssess} />
             <AuthRoute exact path="/articles" component={Articles} />
             <AuthRoute exact path="/dashboard" component={Dashboard} />
