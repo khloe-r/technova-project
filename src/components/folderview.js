@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SelfAssess() {
+export default function FolderView() {
   const classes = useStyles();
 
   return (
@@ -42,7 +42,7 @@ export default function SelfAssess() {
         <p style={{ fontFamily: "Halant", fontWeight: 300, color: "white", margin: "30px 0 10px" }}>Please respond to the form questions accurately and relevant to your recent health experiences.</p>
         <Link to="/my-assessment" style={{ textDecoration: "none" }}>
           <Button className={classes.button} variant="contained">
-            Begin Self-Assessment
+            Folder
           </Button>
         </Link>
       </div>

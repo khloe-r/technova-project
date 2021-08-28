@@ -2,7 +2,42 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "../firebase";
 import { useAuth } from "../contexts/AuthContext.js";
 import { useHistory } from "react-router";
-import { Button, Link, TextField } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { Card, Container, Button, Grid, TextField, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    alignContent: "center",
+    alignItems: "center",
+    maxWidth: "40%",
+    padding: 18,
+  },
+  card: {
+    padding: 35,
+    backgroundColor: "#46633C",
+    color: "white",
+    borderRadius: "25px",
+    marginTop: "60px",
+  },
+  textfield: {
+    backgroundColor: "#668B59",
+  },
+  button: {
+    minWidth: "40%",
+    backgroundColor: "#113516",
+    color: "white",
+    borderRadius: "103px",
+  },
+  appName: {
+    fontFamily: "Cardo",
+    fontWeight: 500,
+    color: "#56365F",
+    letterSpacing: 2,
+    fontSize: 50,
+    margin: "50px 0px 0px",
+  },
+});
 
 export default function Signup() {
   const { signup } = useAuth();
@@ -11,6 +46,7 @@ export default function Signup() {
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const classes = useStyles();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,24 +67,45 @@ export default function Signup() {
 
   return (
     <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <TextField label="Email:" variant="filled" inputRef={emailRef} />
+      <Grid className={classes.grid}>
+        <h1 className={classes.appName}> willow </h1>
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <Card className={classes.card}>
+              <h2>Sign Up</h2>
+              <Grid container spacing={5} justifyContent="center">
+                <Grid item lg={10} xs={10}>
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Email" inputRef={emailRef} />
+                </Grid>
+                <Grid item lg={10} xs={10}>
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Password" type="password" inputRef={passwordRef} />
+                </Grid>
+                <Grid item lg={10} xs={10}>
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Confirm Password" type="password" inputRef={passwordConfirmRef} />
+                </Grid>
+                <Grid item lg={10} xs={10}>
+                  <Button className={classes.button} variant="contained" type="submit">
+                    Sign Up
+                  </Button>
+                </Grid>
+                <Grid item lg={10} xs={10} class>
+                  Already a member?{" "}
+                  <Link to="/login" style={{ color: "white" }}>
+                    Log In
+                  </Link>
+                </Grid>
+              </Grid>
+            </Card>
+          </form>
         </div>
-        <div>
-          <TextField label="Password" type="password" variant="filled" inputRef={passwordRef} />
-        </div>
-        <div>
-          <TextField label="Comfirm password:" type="password" variant="filled" inputRef={passwordConfirmRef} />
-        </div>
-        <Button variant="contained" type="submit">
-          Sign Up
-        </Button>
-        <div>
-          Already a member? <Link href="/login"> {"Log In"} </Link>
-        </div>
-      </form>
+      </Grid>
     </>
   );
 }
