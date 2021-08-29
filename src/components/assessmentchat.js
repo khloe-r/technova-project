@@ -410,7 +410,7 @@ function ResultsPage(props) {
     if (handleValidation()) {
       const saved = folders[folderRef.current.value]["stories"];
       for (const i in saved) {
-        if (article.MyHFTitle == saved[i].name || article.MyHFDescription == saved[i].description) {
+        if (article.MyHFTitle == saved[i].name && article.MyHFDescription == saved[i].description) {
           previouslySaved = true;
         }
       }

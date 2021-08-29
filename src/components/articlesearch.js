@@ -179,7 +179,7 @@ export default function Articles() {
     if (handleValidation()) {
       const saved = folders[folderRef.current.value]["stories"];
       for (const i in saved) {
-        if (article.name == saved[i].name || article.description == saved[i].description) {
+        if (article.name == saved[i].name && article.description == saved[i].description) {
           previouslySaved = true;
         }
       }

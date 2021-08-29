@@ -146,7 +146,7 @@ export default function SymptomTracker() {
     },
   };
 
-  const symptoms = ["Headaches", "Nausea", "Muscle Pain", "Cramps", "Fatigue", "Insomnia", "Menustration"];
+  const symptoms = ["Headaches", "Nausea", "Muscle Pain", "Cramps", "Fatigue", "Insomnia", "Menustruation"];
 
   // Calendar
   const [now, setNow] = useState(dayjs());
@@ -166,11 +166,11 @@ export default function SymptomTracker() {
   return (
     <>
       <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white", paddingTop: 50 }}>Health Tracker</h1>
-      <p style={{ color: "#fff" }}>Take control of your health! Enter symptoms or your menustration schedule to track long-term patterns easily!</p>
+      <p style={{ color: "#fff" }}>Take control of your health! Enter symptoms or your menustruation schedule to track long-term patterns easily!</p>
       <Grid container justifyContent="center">
         <Grid item xs={12}>
           <Button variant="contained" onClick={handleClickOpen} className={classes.longbutton}>
-            Enter a symptom or menustration day
+            Enter a symptom or menustruation day
           </Button>
         </Grid>
       </Grid>
@@ -214,7 +214,7 @@ export default function SymptomTracker() {
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle className={classes.dialog} id="form-dialog-title">
-          <span style={{ fontFamily: "Halant", fontSize: 30 }}>Enter symptom or menustration day</span>
+          <span style={{ fontFamily: "Halant", fontSize: 30 }}>Enter symptom or menustruation day</span>
         </DialogTitle>
         <DialogContent style={{ minWidth: 500 }}>
           {/* <Select autoFocus margin="dense" multiple onChange={handleChange} select id="name" label="What did you experience? You can select multiple!" type="text" fullWidth inputRef={folderRef}>
@@ -244,7 +244,7 @@ export default function SymptomTracker() {
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Date picker dialog"
+              label="Date Experienced"
               format="MM/dd/yyyy"
               value={selectedDate}
               onChange={handleDateChange}
