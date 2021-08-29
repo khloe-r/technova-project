@@ -13,6 +13,7 @@ import AuthRoute from "./AuthRoute";
 import SymptomTracker from "./components/symptom";
 import AssessmentChat from "./components/assessmentchat";
 import FolderView from "./components/folderview";
+import MyAccount from "./components/account";
 import { AuthProvider } from "./contexts/AuthContext";
 import { FiberPin } from "@material-ui/icons";
 
@@ -34,6 +35,7 @@ function App() {
             <AuthRoute exact path="/dashboard" component={Dashboard} />
             <AuthRoute exact path="/symptom-tracker" component={SymptomTracker} />
             <AuthRoute exact path="/my-assessment" component={AssessmentChat} />
+            <AuthRoute exact path="/my-account" component={MyAccount} />
             <AuthRoute exact path="/my-folder/:id" component={FolderView} />
           </Switch>
         </div>

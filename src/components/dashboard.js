@@ -8,6 +8,7 @@ import FindInPageIcon from "@material-ui/icons/FindInPage";
 import ListIcon from "@material-ui/icons/List";
 import FolderIcon from "@material-ui/icons/Folder";
 import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
+import { InsertDriveFileTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
@@ -141,7 +142,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <h1 style={{ color: "white", fontFamily: "Halant", fontWeight: 600, fontSize: "72px", marginTop: "145px" }}>Welcome {currentUser.displayName}</h1>
+      <h1 style={{ color: "white", fontFamily: "Halant", fontWeight: 600, fontSize: "72px", marginTop: "145px" }}>Welcome {currentUser.displayName}!</h1>
       {user?.articles.length === 0 ? (
         <Grid container spacing={3}>
           <Grid item xs={5}>
@@ -178,29 +179,31 @@ export default function Dashboard() {
           </Grid>
         </Grid>
       ) : (
-        <>
-          <h1>Saved Articles</h1>
-          <Grid container spacing={3}>
-            {user?.articles.map((article) => {
+        <div style={{ backgroundColor: "#56365F" }}>
+          <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white", paddingTop: 50 }}>Saved Articles</h1>
+          <Grid container spacing={3} style={{ paddingBottom: 50 }}>
+            {user?.articles.map((article, index) => {
               return (
-                <Grid item xs={2}>
-                  <FolderIcon />
-                  <p>{article.folder}</p>
+                // <Link to={`/my-folder/${index}`}>
+                <Grid item xs={2} component={Link} to={`/my-folder/${index}`}>
+                  <FolderIcon style={{ color: "#917db2" }} />
+                  <p style={{ color: "#fff", textDecoration: "none" }}>{article.folder}</p>
                 </Grid>
+                // </Link>
               );
             })}
             <Grid item xs={2} alignItems="center" display="flex" onClick={handleClickOpen}>
-              <CreateNewFolderIcon />
-              <p>Add New Folder</p>
+              <CreateNewFolderIcon style={{ color: "#917db2" }} />
+              <p style={{ color: "#fff" }}>Add New Folder</p>
             </Grid>
           </Grid>
-        </>
+        </div>
       )}
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Enter Name of New Folder</DialogTitle>
         <DialogContent>
-          <TextField autoFocus margin="dense" id="name" label="New Folder Name" type="email" fullWidth inputRef={folderRef} />
+          <TextField autoFocus margin="dense" id="name" label="New Folder Name" type="text" fullWidth inputRef={folderRef} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

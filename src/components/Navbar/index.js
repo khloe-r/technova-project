@@ -39,6 +39,7 @@ function Navbar() {
           <Link to="/articles">Articles</Link>
           <Link to="/symptom-tracker">Symptom Tracker</Link>
           <Link to="/self-assessment">Self-Assessment</Link>
+          <Link to="/my-account">My Account</Link>
           <Link onClick={handleLogout}>Log Out</Link>
         </nav>
       ) : (
