@@ -241,7 +241,7 @@ export default function Articles() {
     let errors = {};
     let formIsValid = true;
 
-    if (!folderRef.current.value) {
+    if (!(folderRef.current.value >= 0)) {
       formIsValid = false;
       errors.folder = "Please choose a folder";
     }

@@ -46,6 +46,8 @@ export default function MyAccount() {
     }
   }
 
+  console.log(currentUser);
+
   return (
     <>
       <div

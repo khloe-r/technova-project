@@ -183,7 +183,7 @@ export default function SymptomTracker() {
       {/* {Object.keys(events).map((eve) => {
         return <h1>{eve}</h1>;
       })} */}
-      <Grid container justifyContent="center" style={{ marginLeft: 275 }}>
+      <Grid container justifyContent="center" style={{ marginLeft: "20vw" }}>
         {[...Array(n)].map((e, i) => {
           return (
             <>

@@ -116,18 +116,19 @@ export default function Dashboard() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
+    const thename = nameRef.current.value;
     userRef
       .doc(currentUser.uid)
       .set({
-        name: nameRef.current.value,
+        name: thename,
         articles: [],
         symptoms: {},
       })
       .then(() => {
-        setDisplayName(nameRef.current.value);
-        setUnknown(false);
+        setDisplayName(thename);
+        setLoading(true);
       });
+    setUnknown(false);
     setLoading(false);
   }
 
@@ -159,7 +160,7 @@ export default function Dashboard() {
           <h4 style={{ color: "white" }}>Tell us a little about yourself!</h4>
           <form onSubmit={handleSubmit}>
             <div>
-              <TextField label="Name" variant="filled" inputRef={nameRef} />
+              <TextField label="Name" variant="standard" inputRef={nameRef} />
             </div>
             <Button className={classes.button} variant="contained" type="submit">
               Enter

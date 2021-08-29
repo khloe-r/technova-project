@@ -475,7 +475,7 @@ function ResultsPage(props) {
   const handleValidation = () => {
     let errors = {};
     let formIsValid = true;
-    if (!folderRef.current.value) {
+    if (!(folderRef.current.value >= 0)) {
       formIsValid = false;
       errors.folder = "Please choose a folder";
     }
@@ -506,10 +506,12 @@ function ResultsPage(props) {
                         </Typography>
                         <br />
                         <Typography variant="body2" component="p">
-                          {resource.MyHFDescription.slice(3, resource.MyHFDescription.length - 6)}
+                          {resource.MyHFDescription.slice(3, resource.MyHFDescription.length - 6)
+                            .replace(/\r?\n|\r/g, " ")
+                            .replace(/&nbsp;/g, " ")}
                         </Typography>
                       </CardContent>
-                      <CardActions>
+                      <CardActions style={{ display: "block" }}>
                         <div>
                           <a href={resource.AccessibleVersion} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
                             <Button size="small" color="textSecondary" className={classes.link}>
