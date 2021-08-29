@@ -1,4 +1,4 @@
-import { Button, Typography, Card, CardContent, CardActions, Grid } from "@material-ui/core";
+import { Button, Typography, Card, CardContent, CardActions, Grid, CircularProgress } from "@material-ui/core";
 import React, { useState, useEffect, useRef, useReducer } from "react";
 import { useParams } from "react-router";
 import firebase from "firebase/app";
@@ -84,7 +84,7 @@ export default function FolderView() {
   }, []);
 
   if (loading) {
-    return <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white" }}>Loading...</h1>;
+    return <CircularProgress color="#fff" />;
   }
 
   if (wrong) {
@@ -92,7 +92,9 @@ export default function FolderView() {
       <>
         <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white", marginTop: 100 }}>Sorry that folder doesn't exist!</h1>
         <p style={{ color: "white" }}>
-          Return to your <Link to="/dashboard">dashboard</Link> to add more folders!
+          Return to your
+          <Link to="/dashboard">dashboard</Link>
+          to add more folders!
         </p>
       </>
     );
@@ -100,7 +102,6 @@ export default function FolderView() {
 
   return (
     <>
-      <h1 className={classes.appName}> willow </h1>
       <div>
         <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white" }}>Folder: {user?.folder}</h1>
         <Grid container spacing={3}>
@@ -135,7 +136,7 @@ export default function FolderView() {
         </Grid>
         <Link to="/dashboard">
           <Button className={classes.smallButton} variant="contained">
-            Return to Dashboard!
+            <span style={{ textDecoration: "none" }}>Return to Dashboard!</span>
           </Button>
         </Link>
       </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext.js";
 import { Link, useHistory } from "react-router-dom";
-import { AppBar, Button } from "@material-ui/core";
+import { AppBar, Button, ButtonGroup, Grid } from "@material-ui/core";
 
 function Navbar() {
   const { currentUser, logout } = useAuth();
@@ -32,20 +32,53 @@ function Navbar() {
   }
 
   return (
-    <AppBar>
+    // <AppBar>
+    <>
       {currentUser ? (
-        <nav>
-          <Link to="/dashboard">Home</Link>
-          <Link to="/articles">Articles</Link>
-          <Link to="/symptom-tracker">Symptom Tracker</Link>
-          <Link to="/self-assessment">Self-Assessment</Link>
-          <Link to="/my-account">My Account</Link>
-          <Link onClick={handleLogout}>Log Out</Link>
-        </nav>
+        <div style={{ margin: "10px 20px 0px 20px" }}>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid item xs={2} component={Link} to="/dashboard" style={{ textDecoration: "none" }}>
+              <h1 style={{ fontFamily: "Cardo", fontWeight: 500, color: "#56365F", letterSpacing: 2, fontSize: 35, textAlign: "left" }}> willow </h1>
+            </Grid>
+            <Grid item xs={10} style={{ justifyContent: "flex-end", display: "flex" }}>
+              <ButtonGroup style={{ backgroundColor: "#46633C", color: "#fff", padding: "0px 5px", borderRadius: 25 }} variant="text" aria-label="outlined primary button group">
+                <Button>
+                  <Link to="/dashboard" style={{ color: "#B9E9A9", textDecoration: "none", padding: 10 }}>
+                    Home
+                  </Link>
+                </Button>
+                <Button>
+                  <Link to="/articles" style={{ color: "#B9E9A9", textDecoration: "none" }}>
+                    Articles
+                  </Link>
+                </Button>
+                <Button>
+                  <Link to="/symptom-tracker" style={{ color: "#B9E9A9", textDecoration: "none" }}>
+                    Symptom Tracker
+                  </Link>
+                </Button>
+                <Button>
+                  <Link to="/self-assessment" style={{ color: "#B9E9A9", textDecoration: "none" }}>
+                    Self Assessment
+                  </Link>
+                </Button>
+                <Button>
+                  <Link to="/my-account" style={{ color: "#B9E9A9", textDecoration: "none" }}>
+                    My Account
+                  </Link>
+                </Button>
+                <Button onClick={handleLogout} style={{ color: "#B9E9A9", textDecoration: "none" }}>
+                  Log Out
+                </Button>
+              </ButtonGroup>
+            </Grid>
+          </Grid>
+        </div>
       ) : (
         <Link to="/"></Link>
       )}
-    </AppBar>
+    </>
+    // </AppBar>
   );
 }
 export default Navbar;

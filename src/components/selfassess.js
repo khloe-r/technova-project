@@ -29,7 +29,6 @@ export default function SelfAssess() {
 
   return (
     <>
-      <h1 className={classes.appName}> willow </h1>
       <div
         style={{
           position: "absolute",

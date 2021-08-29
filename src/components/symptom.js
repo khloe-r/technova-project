@@ -1,4 +1,4 @@
-import { Button, Grid, Dialog, DialogActions, DialogContent, Card, Chip, Input, InputLabel, DialogContentText, MenuItem, DialogTitle, TextField, Select } from "@material-ui/core";
+import { Button, Grid, Dialog, DialogActions, DialogContent, Card, Chip, Input, CircularProgress, InputLabel, DialogContentText, MenuItem, DialogTitle, TextField, Select } from "@material-ui/core";
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from "@material-ui/pickers";
@@ -31,11 +31,9 @@ const useStyles = makeStyles({
   },
   link: {
     backgroundColor: "#6E8C63",
-    borderRadius: "103px",
     color: "white",
     textDecoration: "none",
-    minWidth: "120px",
-    margin: "0 20px 0",
+    fontSize: 11,
   },
   title: {
     fontSize: 14,
@@ -43,9 +41,22 @@ const useStyles = makeStyles({
     fontWeight: 300,
   },
   root: {
-    minWidth: 275,
     backgroundColor: "#56365F",
     color: "white",
+    margin: 10,
+    padding: 10,
+    minHeight: 100,
+  },
+  longbutton: {
+    minWidth: "40%",
+    backgroundColor: "#113516",
+    color: "white",
+    borderRadius: "103px",
+  },
+  dialog: {
+    backgroundColor: "#56365F",
+    color: "#fff",
+    textAlign: "center",
   },
 });
 
@@ -55,6 +66,8 @@ export default function SymptomTracker() {
   dayjs.extend(customParseFormat);
 
   const [open, setOpen] = React.useState(false);
+  const [viewOpen, setViewOpen] = React.useState(false);
+  const [currentDate, setCurrentDate] = React.useState(false);
   const [alert, setAlert] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [events, setEvents] = React.useState(false);
@@ -76,6 +89,14 @@ export default function SymptomTracker() {
     setOpen(false);
     setSymp([]);
     setAlert();
+  };
+  const handleViewClickOpen = (date) => {
+    setViewOpen(true);
+    setCurrentDate(date);
+  };
+
+  const handleViewClose = () => {
+    setViewOpen(false);
   };
 
   const addEvent = () => {
@@ -139,7 +160,7 @@ export default function SymptomTracker() {
   }
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <CircularProgress color="#fff" />;
   }
 
   return (
@@ -148,7 +169,7 @@ export default function SymptomTracker() {
       <p style={{ color: "#fff" }}>Take control of your health! Enter symptoms or your menustration schedule to track long-term patterns easily!</p>
       <Grid container justifyContent="center">
         <Grid item xs={12}>
-          <Button variant="contained" onClick={handleClickOpen}>
+          <Button variant="contained" onClick={handleClickOpen} className={classes.longbutton}>
             Enter a symptom or menustration day
           </Button>
         </Grid>
@@ -159,13 +180,21 @@ export default function SymptomTracker() {
         <span style={{ marginLeft: 20, marginRight: 20 }}>{dayjs(now).format("MMMM YYYY")}</span>
         <ArrowForwardIcon onClick={forwardMonth} />
       </h1>
+      {/* {Object.keys(events).map((eve) => {
+        return <h1>{eve}</h1>;
+      })} */}
       <Grid container justifyContent="center" style={{ marginLeft: 275 }}>
         {[...Array(n)].map((e, i) => {
           return (
             <>
-              <Grid item xs={1} key={i + 1}>
-                <Card>
-                  <p>{i + 1}</p>
+              <Grid item xs={1} key={i + 1} id={`${i < 9 ? "0" : ""}${i + 1}`}>
+                <Card className={classes.root}>
+                  <p>{`${i < 9 ? "0" : ""}${i + 1}`}</p>
+                  {Object.keys(events).includes(`${dayjs(now).format("MMM")}-${i < 9 ? "0" : ""}${i + 1}-${dayjs(now).format("YYYY")}`) && (
+                    <Button className={classes.link} onClick={() => handleViewClickOpen(`${dayjs(now).format("MMM")}-${i < 9 ? "0" : ""}${i + 1}-${dayjs(now).format("YYYY")}`)}>
+                      Symptoms Recorded
+                    </Button>
+                  )}
                 </Card>
               </Grid>
               {(i + 1) % 7 === 0 && (
@@ -184,7 +213,9 @@ export default function SymptomTracker() {
       </Grid>
 
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Enter symptom or menustration day</DialogTitle>
+        <DialogTitle className={classes.dialog} id="form-dialog-title">
+          <span style={{ fontFamily: "Halant", fontSize: 30 }}>Enter symptom or menustration day</span>
+        </DialogTitle>
         <DialogContent style={{ minWidth: 500 }}>
           {/* <Select autoFocus margin="dense" multiple onChange={handleChange} select id="name" label="What did you experience? You can select multiple!" type="text" fullWidth inputRef={folderRef}>
             {symptoms.map((symp) => {
@@ -195,7 +226,9 @@ export default function SymptomTracker() {
               );
             })}
           </Select> */}
-          <InputLabel id="demo-mutiple-name-label">Select any symptoms you experienced!</InputLabel>
+          <InputLabel id="demo-mutiple-name-label" style={{ margin: "20px 0" }}>
+            Select any symptoms you experienced!
+          </InputLabel>
           <Select fullWidth labelId="demo-mutiple-name-label" id="demo-mutiple-name" multiple value={symp} onChange={handleChange} input={<Input />} MenuProps={MenuProps}>
             {symptoms.map((name) => (
               <MenuItem key={name} value={name}>
@@ -223,12 +256,34 @@ export default function SymptomTracker() {
           </MuiPickersUtilsProvider>
           {alert && <Alert severity="success">Symptoms have been recorded!</Alert>}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
+        <DialogActions className={classes.dialog}>
+          <Button onClick={handleClose} color="primary" style={{ color: "#fff" }}>
             Cancel
           </Button>
-          <Button onClick={addEvent} color="primary">
+          <Button onClick={addEvent} color="primary" style={{ color: "#fff" }}>
             Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={viewOpen} onClose={handleViewClose} aria-labelledby="form-dialog-title">
+        <DialogTitle className={classes.dialog} id="form-dialog-title">
+          <span style={{ fontFamily: "Halant", fontSize: 30 }}>{dayjs(currentDate, "MMM-DD-YYYY").format("MMMM D, YYYY")}</span>
+        </DialogTitle>
+        <DialogContent className={classes.dialog}>
+          <p>On {dayjs(currentDate, "MMM-DD-YYYY").format("MMMM D, YYYY")}, you experienced the following:</p>
+          {events[currentDate]?.map((sy) => {
+            return (
+              <>
+                <Chip label={sy} />
+                <span> </span>
+              </>
+            );
+          })}
+        </DialogContent>
+        <DialogActions className={classes.dialog}>
+          <Button onClick={handleViewClose} color="primary">
+            <span style={{ color: "#fff" }}>Close</span>
           </Button>
         </DialogActions>
       </Dialog>

@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import { useAuth } from "../contexts/AuthContext.js";
 import { Grid, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 import ListIcon from "@material-ui/icons/List";
 import FolderIcon from "@material-ui/icons/Folder";
@@ -48,7 +48,37 @@ const useStyles = makeStyles({
     fontSize: "30px",
     color: "white",
   },
+  dialog: {
+    backgroundColor: "#56365F",
+    color: "#fff",
+    textAlign: "center",
+  },
 });
+
+const CssTextField = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "#56365F",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
+    color: "#56365F",
+    backgroundColor: "#fff",
+    borderRadius: 15,
+  },
+})(TextField);
 
 export default function Dashboard() {
   const { currentUser, setDisplayName } = useAuth();
@@ -92,7 +122,7 @@ export default function Dashboard() {
       .set({
         name: nameRef.current.value,
         articles: [],
-        symptoms: [],
+        symptoms: {},
       })
       .then(() => {
         setDisplayName(nameRef.current.value);
@@ -125,7 +155,7 @@ export default function Dashboard() {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <h1 style={{ color: "white", fontFamily: "Halant", fontWeight: 600, fontSize: "40px" }}>Welcome!</h1>
+          <h1 style={{ color: "white", fontFamily: "Halant", fontWeight: 600, fontSize: "35px" }}>Welcome!</h1>
           <h4 style={{ color: "white" }}>Tell us a little about yourself!</h4>
           <form onSubmit={handleSubmit}>
             <div>
@@ -200,17 +230,21 @@ export default function Dashboard() {
         </div>
       )}
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Enter Name of New Folder</DialogTitle>
-        <DialogContent>
-          <TextField autoFocus margin="dense" id="name" label="New Folder Name" type="text" fullWidth inputRef={folderRef} />
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" style={{ borderRadius: 10 }}>
+        <DialogTitle className={classes.dialog} id="form-dialog-title">
+          <span style={{ fontFamily: "Halant", fontSize: 30 }}>Enter Name of New Folder</span>
+        </DialogTitle>
+        <DialogContent className={classes.dialog}>
+          <div display="flex" justifyContent="center" backgroundColor="#fff" padding="0px 20px">
+            <CssTextField autoFocus margin="dense" id="name" variant="filled" label="New Folder Name" type="text" style={{ backgroundColor: "#fff" }} inputRef={folderRef} />
+          </div>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className={classes.dialog}>
           <Button onClick={handleClose} color="primary">
-            Cancel
+            <span style={{ color: "#fff" }}>Cancel</span>
           </Button>
           <Button onClick={addFolder} color="primary">
-            Add Folder
+            <span style={{ color: "#fff" }}>Add Folder</span>
           </Button>
         </DialogActions>
       </Dialog>

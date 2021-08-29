@@ -14,15 +14,6 @@ const useStyles = makeStyles({
     textAlign: "left",
     margin: "40px 10px 0px",
   },
-  button: {
-    backgroundColor: "#6E8C63",
-    color: "white",
-    marginTop: 50,
-    borderRadius: "25px",
-    fontSize: "18px",
-    minHeight: "75px",
-    minWidth: "325px",
-  },
   card: {
     padding: "10px 50px",
     backgroundColor: "#46633C",
@@ -57,7 +48,6 @@ export default function MyAccount() {
 
   return (
     <>
-      <h1 className={classes.appName}> willow </h1>
       <div
         style={{
           position: "absolute",
@@ -66,14 +56,14 @@ export default function MyAccount() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white" }}>My Account</h1>
+        <h1 style={{ fontFamily: "Halant", fontSize: "35px", color: "white", marginTop: 100 }}>My Account</h1>
         <Card className={classes.card}>
           <img src={pfp} style={{ borderRadius: "50%", height: 200, marginTop: 50 }} />
-          <h3 style={{ fontFamily: "Halant", fontSize: "35px", color: "white" }}>
+          <h3 style={{ fontFamily: "Halant", fontSize: "20px", color: "white" }}>
             My Name: <span style={{ color: "#917DB2" }}>{currentUser.displayName}</span>
           </h3>
 
-          <h3 style={{ fontFamily: "Halant", fontSize: "35px", color: "white" }}>
+          <h3 style={{ fontFamily: "Halant", fontSize: "20px", color: "white" }}>
             My Email: <span style={{ color: "#917DB2" }}>{currentUser.email}</span>
           </h3>
         </Card>

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     backgroundColor: "#46633C",
     color: "white",
     borderRadius: "25px",
-    marginTop: "60px",
+    marginTop: "75px",
   },
   textfield: {
     backgroundColor: "#668B59",
@@ -47,12 +47,19 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const classes = useStyles();
+  const [state, setState] = React.useState({
+    errors: {},
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("signing up!");
+    handleValidation();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      let errors = {};
+      errors.confirm = "Passwords must match";
+      setState({ errors: errors });
       return console.log("error");
     }
 
@@ -64,6 +71,20 @@ export default function Signup() {
       console.log("error");
     }
   }
+
+  const handleValidation = () => {
+    let errors = {};
+    if (!emailRef.current.value) {
+      errors.email = "Please enter email";
+    }
+    if (!passwordRef.current.value) {
+      errors.password = "Please enter password";
+    }
+    if (!passwordConfirmRef.current.value) {
+      errors.confirm = "Please re-enter password";
+    }
+    setState({ errors: errors });
+  };
 
   return (
     <>
@@ -82,13 +103,13 @@ export default function Signup() {
               <h2>Sign Up</h2>
               <Grid container spacing={5} justifyContent="center">
                 <Grid item lg={10} xs={10}>
-                  <TextField fullWidth className={classes.textfield} variant="filled" label="Email" inputRef={emailRef} />
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Email" inputRef={emailRef} helperText={state.errors.email} error={state.errors.email ? true : false} />
                 </Grid>
                 <Grid item lg={10} xs={10}>
-                  <TextField fullWidth className={classes.textfield} variant="filled" label="Password" type="password" inputRef={passwordRef} />
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Password" type="password" inputRef={passwordRef} helperText={state.errors.password} error={state.errors.password ? true : false} />
                 </Grid>
                 <Grid item lg={10} xs={10}>
-                  <TextField fullWidth className={classes.textfield} variant="filled" label="Confirm Password" type="password" inputRef={passwordConfirmRef} />
+                  <TextField fullWidth className={classes.textfield} variant="filled" label="Confirm Password" type="password" inputRef={passwordConfirmRef} helperText={state.errors.confirm} error={state.errors.confirm ? true : false} />
                 </Grid>
                 <Grid item lg={10} xs={10}>
                   <Button className={classes.button} variant="contained" type="submit">
