@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# willow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created with `react`, `material ui` and `firebase` along with APIs from `myHealthfinder` and `CDC Content Services`
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+Our team realized that not all women are educated about the body and health. We ignore chest pain and belly aches without realizing the consequences until it’s too late, or inaccurately self-diagnose using the internet. Minimal knowledge and awareness of how to mitigate these agonizing situations often lead to excessive worrying or anxiety. Women should have access to a platform that educates them on their health and give them the opportunity to seek out information easily in a safe and comfortable space.
 
-### `npm start`
+## What it does
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The web-app is a health resource designed to educate women on their body and health and give them the resources to express their concerns while tracking their body patterns.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The user will be prompted to create an account or log in upon entering the landing page using secure Firebase authentication. After they are logged into their account they will be taken to the Home Page. Here the user will be given the option to start browsing through a library of trusted articles on women’s health with the help of the CDC Content Services API, take a health self-assessment or create folders to organize their articles. If the user decides to start browsing through articles and finds one they like and want to reference later they can save it by creating a folder. This folder will be stored on their homepage for later use. If the users decide to start with their health self-assessment, the user will be prompted to answer a series of personal questions with the help of the MyHealthFinder API. Once they have completed the assessment they will be given a list of personalized article recommendations to educate themselves around their personal health. Moving on to the Symptoms Tracker page: The user can enter symptoms they are experiencing that day or log their menstruation schedule to track long-term patterns easily in one place! All symptoms are viewable on a working calendar! Lastly, we have the My Account page that stores the user’s name and email and is also where they can log out at the end of the day!
 
-### `npm test`
+## How we built it
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We first planned, designed and routed the prototype in Figma. Then we built the site using React for the frontend and Google Firebase including Authentication, Hosting and Firestore for the backend. We used an API integration with CDC Content Services API to provide reputable resources and articles to users through search queries, and MyHealthfinder API to provide personalized recommendations based on user's responses to a self-assessment.
 
-### `npm run build`
+## Challenges we ran into
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The primary challenge we faced was differentiating Willow to be competitive against other apps currently on the market. It was crucial for Willow to have a unique selling proposition that makes it a better choice for users.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Accomplishments that we're proud of
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+We’re extremely proud we were able to build an entire full-stack platform in a short time while fitting the prototype style guide. We ended up adapting our ideas as we moved forward but we’re happy with the design of the final product and its functionality.
 
-### `npm run eject`
+## What we learned
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+We learned about the process of designing and creating a prototype. This allowed us to improve our UI/UX of Willow and gain insight into the design aspect and importance of aesthetics. Furthermore, we learned how to efficiently work as a team with members from different backgrounds by capitalizing on individual strengths.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## What's next for Willow
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+In the future we would love to add additional features to enhance the community of women online through discussion. One step would be adding a message board for users to connect and talk about their personal experiences, resources that helped them, and give advice.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
