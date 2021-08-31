@@ -45,7 +45,7 @@ const useStyles = makeStyles({
     color: "white",
     margin: 10,
     padding: 10,
-    minHeight: 100,
+    minHeight: 125,
   },
   longbutton: {
     minWidth: "40%",
@@ -64,6 +64,8 @@ export default function SymptomTracker() {
   var dayjs = require("dayjs");
   var customParseFormat = require("dayjs/plugin/customParseFormat");
   dayjs.extend(customParseFormat);
+
+  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   const [open, setOpen] = React.useState(false);
   const [viewOpen, setViewOpen] = React.useState(false);
@@ -183,7 +185,20 @@ export default function SymptomTracker() {
       {/* {Object.keys(events).map((eve) => {
         return <h1>{eve}</h1>;
       })} */}
-      <Grid container justifyContent="center" style={{ marginLeft: "20vw" }}>
+      <Grid container justifyContent="flex-start" style={{ marginLeft: "20vw" }} id="calendar-grid">
+        {[...Array(7)].map((e, i) => {
+          return (
+            <Grid item xs={1}>
+              <p>{weekdays[i]}</p>
+            </Grid>
+          );
+        })}
+        <Grid item xs={5}>
+          <span> </span>
+        </Grid>
+        <Grid item xs={dayjs(`2021-${dayjs(now).format("MM")}-01`).day()}>
+          <span> </span>
+        </Grid>
         {[...Array(n)].map((e, i) => {
           return (
             <>
@@ -197,16 +212,16 @@ export default function SymptomTracker() {
                   )}
                 </Card>
               </Grid>
-              {(i + 1) % 7 === 0 && (
+              {(i + 1 + parseInt(dayjs(`2021-${dayjs(now).format("MM")}-01`).day())) % 7 === 0 && (
                 <Grid item xs={5} key={i + 1}>
                   <span> </span>
                 </Grid>
               )}
-              {i === n - 1 && (
+              {/* {i === n - 1 && (
                 <Grid item xs={12 - (n % 7)} key={i + 1}>
                   <span> </span>
                 </Grid>
-              )}
+              )} */}
             </>
           );
         })}
